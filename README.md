@@ -47,6 +47,8 @@ We further provide all runs and data from our paper [here](https://drive.google.
 
 ## Requirements
 
+This code was designed for NVIDIA GPUs with CUDA using PyTorch. Support for other GPU architectures may be possible by following [PyTorch guidelines](https://pytorch.org/get-started/locally/). Current templates would likely take an infeasible amount of time on CPU-only machines.
+
 ### Installation
 
 ```bash
@@ -62,6 +64,8 @@ pip install -r requirements.txt
 When installing `texlive-full`, you may need to [hold Enter](https://askubuntu.com/questions/956006/pregenerating-context-markiv-format-this-may-take-some-time-takes-forever).
 
 ### Supported Models and API Keys
+
+We support a wide variety of models including open-weight and API-only models. In general, we recommend only using frontier models above the capability of the original GPT-4.
 
 #### OpenAI API (GPT-4)
 
@@ -178,6 +182,8 @@ python launch_scientist.py --model "gpt-4o-2024-05-13" --experiment nanoGPT_lite
 python launch_scientist.py --model "claude-3-5-sonnet-20240620" --experiment nanoGPT_lite --num-ideas 2
 ```
 
+If you have more than 1 GPU, use the `parallel` option to parallelize ideas across multiple GPUs.
+
 ## Getting an LLM Generated Paper Review
 
 ```python
@@ -272,6 +278,9 @@ Please refer to the instructions for different templates. In this current iterat
 Please see this [PR](https://github.com/SakanaAI/AI-Scientist/pull/7) for an example of how to add a new model, e.g. this time for Claude via Bedrock.
 We do not advise any model that is significantly weaker than GPT-4 level for The AI Scientist.
 
+### Why do I need to run the baseline runs myself?
+These appear as `run_0` and should be run per machine you execute The AI Scientist on for accurate run-time comparisons due to hardware differences.
+
 ## Containerization
 
 We include a [community-contributed](https://github.com/SakanaAI/AI-Scientist/pull/21) Docker image that may assist with your containerization efforts in `experimental/Dockerfile`.
@@ -280,10 +289,10 @@ You can use this image like this:
 
 ```bash
 # Endpoint Script
-docker run -e OPENAI_API_KEY=$OPENAI_API_KEY <AI_SCIENTIST_IMAGE> \
-       --model “gpt-4o-2024-05-13” \
-       --experiment 2d_diffusion \
-       --num-ideas 1
+docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -v `pwd`/templates:/app/AI-Scientist/templates <AI_SCIENTIST_IMAGE> \
+  --model gpt-4o-2024-05-13 \
+  --experiment 2d_diffusion \
+  --num-ideas 2
 ```
 
 ```bash
