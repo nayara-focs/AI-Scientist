@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "batch_size_grokking",
+        "Title": "Batch Size Grokking: Assessing the impact of the training batchsize on the grokking phenomenon",
+        "Experiment": "Modify the experiments to dynamically adjust the batch size during training, starting with a small batch size and gradually increasing it. This could potentially lead to faster generalization on the validation set.",
+        "Interestingness": 6,
+        "Feasibility": 4,
+        "Novelty": 4,
+        "novel": true
+    },
+    {
+        "Name": "architecture_complexity_grokking",
+        "Title": "Architectural Complexity and Grokking: Investigating the impact of model architecture on the grokking phenomenon",
+        "Experiment": "Alter the Transformer model architecture by varying the number of layers or the dimension of the model. Train and evaluate the models on small algorithmically generated datasets to observe the effects of architectural complexity on grokking and generalization.",
+        "Interestingness": 8,
+        "Feasibility": 8,
+        "Novelty": 7,
+        "novel": false
+    }
+]

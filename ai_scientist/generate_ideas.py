@@ -300,6 +300,7 @@ def search_for_papers(query, result_limit=10) -> Union[None, List[Dict]]:
     rsp.raise_for_status()
     results = rsp.json()
     total = results["total"]
+    # time.sleep(5.0)
     time.sleep(1.0)
     if not total:
         return None
@@ -462,12 +463,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         type=str,
-        default="gpt-4o-2024-05-13",
+        default="gpt-3.5-turbo",
         choices=[
             "claude-3-5-sonnet-20240620",
             "gpt-4o-2024-05-13",
             "deepseek-coder-v2-0724",
             "llama3.1-405b",
+            "gpt-3.5-turbo",
         ],
         help="Model to use for AI Scientist.",
     )
@@ -476,11 +478,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Skip idea generation and use existing ideas.",
     )
-    parser.add_argument(
-        "--check-novelty",
-        action="store_true",
-        help="Check novelty of ideas.",
-    )
+    # parser.add_argument(
+    #     "--check-novelty",
+    #     action="store_true",
+    #     help="Check novelty of ideas.",
+    # )
     args = parser.parse_args()
 
     # Create client
@@ -506,11 +508,11 @@ if __name__ == "__main__":
 
         print(f"Using Vertex AI with model {client_model}.")
         client = anthropic.AnthropicVertex()
-    elif args.model == "gpt-4o-2024-05-13":
+    elif args.model == "gpt-3.5-turbo":
         import openai
 
         print(f"Using OpenAI API with model {args.model}.")
-        client_model = "gpt-4o-2024-05-13"
+        client_model = "gpt-3.5-turbo"
         client = openai.OpenAI()
     elif args.model == "deepseek-coder-v2-0724":
         import openai
